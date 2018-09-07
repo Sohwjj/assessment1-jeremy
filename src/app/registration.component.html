@@ -61,8 +61,12 @@
 
   <mat-form-field>
     <input type="text" placeholder="Contact Number" 
-      name="contact" ngModel  matInput required>
-      <mat-hint>Your contact number</mat-hint>
+      name="contact" #contactField="ngModel" ngModel  matInput required
+      pattern="[0-9+-\s\(\)]*">
+      <mat-hint *ngIf="contactField.invalid">
+        Contact number should not contain invalid characters
+        (+,-, space, and round brackets are allowed)
+      </mat-hint>  
   </mat-form-field>
 
   <div fxLayoutAlign="end">
