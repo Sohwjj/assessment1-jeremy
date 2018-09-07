@@ -1,0 +1,75 @@
+<form #regForm="ngForm" (ngSubmit)="processReg(regForm)"
+  fxLayout="column row" fxLayoutGap="10px">
+
+  <mat-form-field>
+    <input type="email" placeholder="Email"
+      #emailField="ngModel"
+      name="email" ngModel matInput required email>
+    <mat-hint *ngIf="emailField.invalid">
+      Please enter a valid email
+    </mat-hint>
+    <mat-error *ngIf="emailField.hasError('email')">
+      Invalid email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="password" placeholder="Password"
+      #passField="ngModel"
+      name="password" ngModel matInput required
+      pattern="(?=.*[@,#,$])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+    <mat-hint *ngIf="passField.invalid">
+        Password should have at lease 8 characters, 
+        uses both uppercase and lowercase letters, 
+        include one or more numerical digits 
+        and one of these special characters @, #, $
+    </mat-hint>  
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" placeholder="Name"
+      name="name" ngModel matInput required minlength="2" maxlength="30">
+    <mat-hint>Please enter your official name</mat-hint>
+  </mat-form-field>
+
+  <div *ngIf="gender.invalid" class="genreq">Please select your gender *</div>
+  <mat-radio-group name="gender" 
+    ngModel required #gender="ngModel" fxLayoutGap="5px">
+    <mat-radio-button value="male">Male</mat-radio-button>
+    <mat-radio-button value="female">Female</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field>
+    <input placeholder="Date of Birth" name="dob"
+        ngModel matInput required [matDatepicker]="datepicker">
+    <mat-datepicker-toggle matSuffix [for]="datepicker">
+    </mat-datepicker-toggle>
+    <mat-datepicker #datepicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" placeholder="Address"
+      name="address" ngModel matInput required minlength="2" maxlength="30">
+    <mat-hint>Your address</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" placeholder="Country"
+      name="country" ngModel matInput required minlength="2" maxlength="30">
+    <mat-hint>Your country</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" placeholder="Contact Number" 
+      name="contact" ngModel  matInput required>
+      <mat-hint>Your contact number</mat-hint>
+  </mat-form-field>
+
+  <div fxLayoutAlign="end">
+    <button type="submit" [disabled]="regForm.invalid"
+      mat-button mat-raised-button color="primary">
+      Submit
+    </button>
+  </div>
+
+</form>
